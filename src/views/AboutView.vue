@@ -1,15 +1,42 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <el-form :inline="true" :model="form" class="demo-form-inline">
+    <el-form-item label="当前时间戳">
+      <el-button type="primary" @click="getNow">生成</el-button>{{nowTimestamp}}
+    </el-form-item>
+    <el-form-item>
+      <el-input v-model="form.timestamp" placeholder="timestamp" />
+      <el-button type="primary" @click="toTimestamp">&lt;</el-button>
+      <el-button type="primary" @click="toDate">&gt;</el-button>
+      <el-input v-model="form.date" placeholder="date" />
+      <!-- <el-select v-model="formInline.region" placeholder="Activity zone">
+        <el-option label="Zone one" value="shanghai" />
+        <el-option label="Zone two" value="beijing" />
+      </el-select> -->
+    </el-form-item>
+    <el-form-item>
+
+    </el-form-item>
+  </el-form>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+<script lang="ts" setup>
+import moment from "moment";
+import { reactive, ref } from "vue";
+
+let nowTimestamp = ref(moment().valueOf());
+const form = reactive({
+  timestamp: nowTimestamp.value,
+  date: "",
+});
+const getNow = () => {
+  nowTimestamp.value = moment().valueOf();
+};
+const toTimestamp = () => {
+  form.timestamp = moment(form.date.valueOf()).valueOf();
+};
+const toDate = () => {
+  console.log(moment(form.timestamp));
+  form.date = moment(form.timestamp).format('YYYY-MM-DD HH:mm:ss')
+};
+</script>
+

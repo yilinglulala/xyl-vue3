@@ -1,3 +1,11 @@
+<!--
+ * @Author: xuyil xuyil@yealink.com
+ * @Date: 2022-12-05 09:17:36
+ * @LastEditors: xuyil xuyil@yealink.com
+ * @LastEditTime: 2022-12-05 10:01:37
+ * @FilePath: \tools\src\App.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
@@ -5,13 +13,14 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <!-- <HelloWorld msg="You did it!" /> -->
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
