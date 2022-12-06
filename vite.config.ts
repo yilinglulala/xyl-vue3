@@ -1,3 +1,7 @@
+/*
+ * @FilePath: \tools\vite.config.ts
+ * @Description: 
+ */
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
@@ -9,7 +13,8 @@ export default defineConfig({
   plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@views': fileURLToPath(new URL('./src/views', import.meta.url)),
     }
   }
 })

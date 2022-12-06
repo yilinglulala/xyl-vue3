@@ -20,3 +20,4 @@ export const addClipboard = (text: string) => {
     document.body.removeChild(textarea)
   }
 }
+

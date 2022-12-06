@@ -8,10 +8,6 @@
       <el-button type="primary" @click="toTimestamp">&lt;</el-button>
       <el-button type="primary" @click="toDate">&gt;</el-button>
       <el-input v-model="form.date" placeholder="date" />
-      <!-- <el-select v-model="formInline.region" placeholder="Activity zone">
-        <el-option label="Zone one" value="shanghai" />
-        <el-option label="Zone two" value="beijing" />
-      </el-select> -->
     </el-form-item>
     <el-form-item>
 
