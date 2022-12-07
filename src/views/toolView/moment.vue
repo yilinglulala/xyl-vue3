@@ -1,10 +1,14 @@
+<!--
+ * @FilePath: \tools\src\views\toolView\moment.vue
+ * @Description: 时间处理
+-->
 <template>
   <el-form :inline="true" :model="form" class="demo-form-inline">
     <el-form-item label="当前时间戳">
       <el-button type="primary" @click="getNow">生成</el-button>{{nowTimestamp}}
     </el-form-item>
     <el-form-item>
-      <el-input v-model="form.timestamp" placeholder="timestamp" />
+      <el-input v-model.number="form.timestamp" placeholder="timestamp" clearable/>
       <el-button type="primary" @click="toTimestamp">&lt;</el-button>
       <el-button type="primary" @click="toDate">&gt;</el-button>
       <el-input v-model="form.date" placeholder="date" />
@@ -31,8 +35,7 @@ const toTimestamp = () => {
   form.timestamp = moment(form.date.valueOf()).valueOf();
 };
 const toDate = () => {
-  console.log(moment(form.timestamp));
-  form.date = moment(form.timestamp).format('YYYY-MM-DD HH:mm:ss')
+  form.date = moment(new Date(form.timestamp)).format('YYYY-MM-DD HH:mm:ss')
 };
 </script>
 
