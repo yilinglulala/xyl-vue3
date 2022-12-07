@@ -1,6 +1,5 @@
 /*
  * @FilePath: \tools\vite.config.ts
- * @Description: 
  */
 import { fileURLToPath, URL } from 'node:url'
 
