@@ -9,6 +9,7 @@
     </el-form-item>
     <el-form-item>
       <el-input v-model.number="form.timestamp" placeholder="timestamp" clearable/>
+      <el-button @click="()=>form.timestamp*=1000">秒</el-button>
       <el-button type="primary" @click="toTimestamp">&lt;</el-button>
       <el-button type="primary" @click="toDate">&gt;</el-button>
       <el-input v-model="form.date" placeholder="date" />
@@ -28,6 +29,7 @@ const form = reactive({
   timestamp: nowTimestamp.value,
   date: "",
 });
+
 const getNow = () => {
   nowTimestamp.value = moment().valueOf();
 };
@@ -37,5 +39,6 @@ const toTimestamp = () => {
 const toDate = () => {
   form.date = moment(new Date(form.timestamp)).format('YYYY-MM-DD HH:mm:ss')
 };
+toDate()
 </script>
 
