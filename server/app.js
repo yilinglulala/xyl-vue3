@@ -5,7 +5,7 @@
 const Koa = require('koa')
 const path = require('path');
 const fs = require('fs')
-const staticServe = require('koa-static');
+// const staticServe = require('koa-static');
 const route = require('koa-route')
 const Router = require('koa-router')
 const router = new Router()
@@ -13,6 +13,7 @@ const app = new Koa()
 
 // Context 对象
 const main = (ctx) => {
+  console.log(ctx.request.path)
   /**1 */
   // if (ctx.request.accepts('xml')) {
   //   // text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
@@ -32,12 +33,12 @@ const main = (ctx) => {
   // ctx.response.type = 'html';
   // ctx.response.body = fs.createReadStream('../index.html');
   /**3 路由*/
-  // if (ctx.request.path !== '/') {
-  //   ctx.response.type = 'html';
-  //   ctx.response.body = '<a href="/">Index Page</a>';
-  // } else {
-  //   ctx.response.body = 'Hello World';
-  // }
+  if (ctx.request.path !== '/') {
+    ctx.response.type = 'html';
+    ctx.response.body = '<a href="/">Index Page</a>';
+  } else {
+    ctx.response.body = 'Hello World';
+  }
 }
 app.use(main)
 
@@ -49,16 +50,19 @@ const about = (ctx) => {
 const home = (ctx) => {
   ctx.response.body = 'home page'
 }
-
 app.use(route.get('/home', home))
 app.use(route.get('/about', about))
-/**5 koa-router 路由*/
-router.get('/', (ctx) => {
-  ctx.body = 'use koa-router'
-})
-app.use(router.routes())
 
-const staticSource = staticServe(path.join(__dirname));
-app.use(staticSource)
+// const static = require("koa-static")
+// app.use(static(path.join(__dirname, './static')))
+// /**5 koa-router 路由*/
+// router.get('/', (ctx) => {
+//   ctx.body = 'use koa-router'
+// })
+// app.use(router.routes())
+
+// const staticSource = staticServe(path.join(__dirname));
+// app.use(staticSource)
 
 app.listen(3000)
+console.log(3000)
