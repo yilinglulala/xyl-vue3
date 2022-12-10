@@ -9,3 +9,13 @@ const logger = async (ctx, next) => {
   await next()
 }
 module.exports = { logger }
+
+// 若有异步中间件需要加上async/await 
+
+// 中间件合成
+// const compose = require('koa-compose');
+// const main = ctx => {
+//   ctx.response.body = 'Hello World';
+// };
+// const middlewares = compose([logger, main]);
+// app.use(middlewares);
