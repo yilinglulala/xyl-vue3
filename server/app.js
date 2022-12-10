@@ -3,16 +3,25 @@
  * 阮一峰教程 https://www.ruanyifeng.com/blog/2017/08/koa.html
  */
 const Koa = require('koa')
-const path = require('path');
+const path = require('path')
 const fs = require('fs')
 const route = require('koa-route')
 const Router = require('koa-router')
-const koaStatic = require('koa-static'); // 静态资源
+const koaStatic = require('koa-static') // 静态资源
 
 const router = new Router()
 const app = new Koa()
+// 日志
+const { logger } = require('./src/logger')
+// console.log(logger)
+// const logger = async (ctx, next) => {
+//   console.log(`${Date.now()} ${ctx.request.method} ${ctx.request.url}`);
+//   await next(); // 需要加await 否则不会进入下一个中间件
+// }
+app.use(logger)
 
-const static = koaStatic(path.join(__dirname, '/static'));
+// 静态资源
+const static = koaStatic(path.join(__dirname, '/static'))
 app.use(static)
 
 // Context 对象
@@ -64,13 +73,12 @@ router.get('/', (ctx) => {
 app.use(router.routes())
 
 // 重定向
-const redirect = ctx => {
-  ctx.response.redirect('/home');
-  ctx.response.body = '<a href="/">Index Page</a>';
-};
+const redirect = (ctx) => {
+  ctx.response.redirect('/home')
+  ctx.response.body = '<a href="/">Index Page</a>'
+}
 
-app.use(route.get('/redirect', redirect));
-
+app.use(route.get('/redirect', redirect))
 
 
 app.listen(3000)
