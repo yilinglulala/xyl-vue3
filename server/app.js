@@ -5,11 +5,15 @@
 const Koa = require('koa')
 const path = require('path');
 const fs = require('fs')
-// const staticServe = require('koa-static');
 const route = require('koa-route')
 const Router = require('koa-router')
+const koaStatic = require('koa-static'); // 静态资源
+
 const router = new Router()
 const app = new Koa()
+
+const static = koaStatic(path.join(__dirname, '/static'));
+app.use(static)
 
 // Context 对象
 const main = (ctx) => {
@@ -53,16 +57,13 @@ const home = (ctx) => {
 app.use(route.get('/home', home))
 app.use(route.get('/about', about))
 
-// const static = require("koa-static")
-// app.use(static(path.join(__dirname, './static')))
 // /**5 koa-router 路由*/
-// router.get('/', (ctx) => {
-//   ctx.body = 'use koa-router'
-// })
-// app.use(router.routes())
+router.get('/', (ctx) => {
+  ctx.body = 'use koa-router'
+})
+app.use(router.routes())
 
-// const staticSource = staticServe(path.join(__dirname));
-// app.use(staticSource)
+
 
 app.listen(3000)
-console.log(3000)
+console.log(`监听端口：3000`)
