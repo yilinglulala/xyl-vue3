@@ -37,14 +37,14 @@ const main = (ctx) => {
   // ctx.response.type = 'html';
   // ctx.response.body = fs.createReadStream('../index.html');
   /**3 路由*/
-  if (ctx.request.path !== '/') {
-    ctx.response.type = 'html';
-    ctx.response.body = '<a href="/">Index Page</a>';
-  } else {
-    ctx.response.body = 'Hello World';
-  }
+  // if (ctx.request.path !== '/') {
+  //   ctx.response.type = 'html';
+  //   ctx.response.body = '<a href="/">Index Page</a>';
+  // } else {
+  //   ctx.response.body = 'Hello World';
+  // }
 }
-app.use(main)
+// app.use(main)
 
 /**4 koa-route路由*/
 const about = (ctx) => {
@@ -62,6 +62,14 @@ router.get('/', (ctx) => {
   ctx.body = 'use koa-router'
 })
 app.use(router.routes())
+
+// 重定向
+const redirect = ctx => {
+  ctx.response.redirect('/home');
+  ctx.response.body = '<a href="/">Index Page</a>';
+};
+
+app.use(route.get('/redirect', redirect));
 
 
 
