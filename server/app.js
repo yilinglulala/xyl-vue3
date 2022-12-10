@@ -8,16 +8,15 @@ const fs = require('fs')
 const route = require('koa-route')
 const Router = require('koa-router')
 const koaStatic = require('koa-static') // 静态资源
+const koaBody = require('koa-body');
+const { webAppCompose } = require('./src/webApp')
 
 const router = new Router()
 const app = new Koa()
+
+app.use(koaBody()) // 读取body 参数
 // 日志
 const { logger } = require('./src/logger')
-// console.log(logger)
-// const logger = async (ctx, next) => {
-//   console.log(`${Date.now()} ${ctx.request.method} ${ctx.request.url}`);
-//   await next(); // 需要加await 否则不会进入下一个中间件
-// }
 app.use(logger)
 
 // 静态资源
@@ -77,9 +76,9 @@ const redirect = (ctx) => {
   ctx.response.redirect('/home')
   ctx.response.body = '<a href="/">Index Page</a>'
 }
-
 app.use(route.get('/redirect', redirect))
 
-
+// cookie
+app.use(webAppCompose)
 app.listen(3000)
 console.log(`监听端口：3000`)
