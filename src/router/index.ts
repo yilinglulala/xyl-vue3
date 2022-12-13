@@ -23,6 +23,11 @@ const router = createRouter({
           name: 'json',
           component: () => import('@/views/toolView/json.vue')
         },
+        {
+          path: '/configForm',
+          name: 'configForm',
+          component: () => import('@/views/toolView/configForm.vue')
+        },
       ]
     }
   ]

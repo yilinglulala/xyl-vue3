@@ -41,6 +41,14 @@ let menu = [
           },
         },
       },
+      {
+        title: "configForm",
+        vOn: {
+          click: () => {
+            pageTo("configForm");
+          },
+        },
+      },
     ],
   },
 ];
