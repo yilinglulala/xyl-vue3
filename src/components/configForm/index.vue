@@ -1,7 +1,7 @@
 <!--
  * @FilePath: \tools\src\components\admin\configForm\index.vue
  * @Description: 配置表单
-import configForm from '@/components/admin/configForm/index.vue'
+ * import configForm from '@/components/configForm/index.vue'
 -->
 <template>
   <el-form class="edit-form" :model="form" :rules="formRules" ref="form" :label-position="labelPosition">

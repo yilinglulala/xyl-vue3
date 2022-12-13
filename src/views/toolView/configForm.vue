@@ -5,8 +5,10 @@
 <template>
   <section class="tool-config-form">
     <el-button @click="()=>{ drawerVisible=true }">打开源码</el-button>
-    <config-form :form-items="formItems" :form="form" label-position="top" :formItemClick="formItemClick"></config-form>
     <el-button type="primary" @click="handleAdd">添加</el-button>
+
+    <config-form style="width: 520px" :form-items="formItems" :form="form" label-position="top" :formItemClick="formItemClick"></config-form>
+    
     <!-- 配置 -->
     <el-dialog v-model="dialogFormVisible" title="添加配置">
       <config-form :form-items="singleFormItems" :form="obj.curItemFormData"></config-form>
