@@ -1,3 +1,15 @@
+# todo
+- 引入 scss
+- 使用 axios
+- 配置表单
+  [ ] 下拉框子项如何配置
+  [ ] $t() 处理
+  [ ] v-bind
+- 配置表格
+  
+- 路由
+  -  menu 通过路由动态生成
+
 # tools
 
 This template should help get you started developing with Vue 3 in Vite.
