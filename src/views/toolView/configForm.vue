@@ -11,12 +11,15 @@
     
     <!-- 配置 -->
     <el-dialog v-model="dialogFormVisible" title="添加配置">
-      <config-form :form-items="singleFormItems" :form="obj.curItemFormData"></config-form>
+      <config-form :form-items="singleFormItems" :form="obj.curItemFormData" label-position="top"></config-form>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取消</el-button>
           <el-button type="primary" @click="handleSingle">
             确定
+          </el-button>
+          <el-button type="primary" @click="handleCopy(obj.curItemFormData)">
+            复制
           </el-button>
         </span>
       </template>
@@ -36,6 +39,8 @@ interface IFormItem {
 }
 import { computed, reactive, ref } from "vue";
 import configForm from "@/components/configForm/index.vue";
+import { clone, cloneDeep } from "lodash-es";
+import { addClipboard } from "@/utils/tools";
 let drawerVisible = ref(false);
 let dialogFormVisible = ref(false);
 let addMode = ref(false);
@@ -83,6 +88,7 @@ let singleFormItems = reactive([
       { label: "el-switch", value: "el-switch" },
       { label: "el-checkbox", value: "el-checkbox" },
       { label: "el-input-number", value: "el-input-number" },
+      { label: "add-form", value: "add-form" },
     ],
   },
   {
@@ -97,7 +103,14 @@ let singleFormItems = reactive([
 ]);
 const strFormItem = computed({
   get() {
-    return JSON.stringify(formItems, null, 4);
+    let form = cloneDeep(formItems)
+    form = form.map(v=>{
+      return {
+        ...v,
+        label: `this.$t('${v.label}')`
+      }
+    })
+    return JSON.stringify(form, null, 4);
   },
   set(value: string) {
     try {
@@ -115,16 +128,19 @@ const formItemClick = (item: IFormItem) => {
   addMode.value = false;
 };
 const handleSingle = () => {
+  dialogFormVisible.value = false
   if (addMode.value) {
     formItems.push(obj.curItemFormData);
     obj.curItemFormData = reactive({ key: "", label: "" });
   }
 };
+const handleCopy = (data) => {
+  addClipboard(JSON.stringify(data))
+}
 // 【添加】
 const handleAdd = () => {
   dialogFormVisible.value = true;
   addMode.value = true;
-
 };
 </script>
 <style>

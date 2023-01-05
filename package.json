@@ -9,8 +9,10 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.10",
     "element-plus": "^2.2.19",
     "esbuild": "^0.15.12",
+    "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "pinia": "^2.0.21",
     "vue": "^3.2.38",

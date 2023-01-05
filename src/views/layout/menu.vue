@@ -12,44 +12,28 @@
           </el-icon>
           <span>{{item.title}}</span>
         </template>
-        <el-menu-item v-for="(subMebu,j) in item.children" :index="`${i}-${j}`" :key="`${i}-${j}`"
-          v-on="subMebu.vOn">{{subMebu.title}}</el-menu-item>
+        <el-menu-item v-for="(subMebu,j) in item.children" :index="`${i}-${j}`" :key="`${i}-${j}`" v-on="subMebu.vOn">
+          {{subMebu.title}}</el-menu-item>
       </el-sub-menu>
     </el-menu>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { routes } from "@/router";
+const toolRouteChildren = routes[0].children.map((route) => ({
+  title: route.name,
+  vOn: {
+    click: () => {
+      pageTo(route.name);
+    },
+  },
+}));
 // 菜单项
 let menu = [
   {
     title: "工具箱",
-    children: [
-      {
-        title: "moment",
-        vOn: {
-          click: () => {
-            pageTo("moment");
-          },
-        },
-      },
-      {
-        title: "json",
-        vOn: {
-          click: () => {
-            pageTo("json");
-          },
-        },
-      },
-      {
-        title: "configForm",
-        vOn: {
-          click: () => {
-            pageTo("configForm");
-          },
-        },
-      },
-    ],
+    children: toolRouteChildren,
   },
 ];
 
