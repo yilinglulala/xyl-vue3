@@ -30,6 +30,11 @@ export const routes = [
         name: 'configTable',
         component: () => import('@/views/toolView/configTable/index.vue')
       },
+      {
+        path: '/chart',
+        name: 'chart',
+        component: () => import('@/views/toolView/chart/index.vue')
+      },
     ]
   }
 ]
@@ -39,3 +44,7 @@ const router = createRouter({
 })
 
 export default router
+
+
+
+  

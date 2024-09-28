@@ -5,50 +5,114 @@
     <config-form :form-items="formItems" :form="formData"></config-form>
 -->
 <template>
-  <el-form class="edit-form" :inline="true" :model="form" :rules="formRules" ref="form" :label-position="labelPosition">
+  <el-form
+    class="edit-form"
+    :inline="true"
+    :model="form"
+    :rules="formRules"
+    ref="form"
+    :label-position="labelPosition"
+  >
     <div v-for="item in formItems" :key="item.key">
-      <div v-if="item.isTitle" v-bind="item.bind" v-show="item.show === undefined || item.show()">{{item.title}}</div>
-      <el-form-item v-else :label="item.label" :required="item.required" v-bind="item.formItemBind"
-        @click="()=>{formItemClick&&formItemClick(item)}" v-on="formItemOn || item.formItemOn"
-        v-show="item.show === undefined || item.show()" :prop="item.key">
+      <div
+        v-if="item.isTitle"
+        v-bind="item.bind"
+        v-show="item.show === undefined || item.show()"
+      >
+        {{ item.title }}
+      </div>
+      <el-form-item
+        v-else
+        :label="item.label"
+        :required="item.required"
+        v-bind="item.formItemBind"
+        @click="
+          () => {
+            formItemClick && formItemClick(item);
+          }
+        "
+        v-on="formItemOn || item.formItemOn"
+        v-show="item.show === undefined || item.show()"
+        :prop="item.key"
+      >
         <!-- label -->
         <template #label>
           <span v-if="item.labelHelperText" class="title">
-            {{item.label}}
+            {{ item.label }}
             <helper is-gray>
               <template>{{ item.labelHelperText }}</template>
             </helper>
           </span>
         </template>
         <!-- tip -->
-        <div class="tip">{{item.tip}}</div>
+        <div class="tip">{{ item.tip }}</div>
         <helper is-gray v-if="item.helperText">
           <template>{{ item.helperText }}</template>
         </helper>
         <!-- 表单控件 -->
-        <el-select v-if="item.comp==='el-select'" v-model="form[item.key]" v-bind="item.bind">
-          <el-option v-for="opt in item.options" :key="opt.value" :label="opt.label" :value="opt.value"> </el-option>
+        <el-select
+          v-if="item.comp === 'select'"
+          v-model="form[item.key]"
+          v-bind="item.bind"
+        >
+          <el-option
+            v-for="opt in item.options"
+            :key="opt.value"
+            :label="opt.label"
+            :value="opt.value"
+          >
+          </el-option>
         </el-select>
-        <Component v-else :is="item.comp||'el-input'" v-model="form[item.key]" v-bind="item.bind">
+        <Component
+          v-else
+          :is="item.comp || 'el-input'"
+          v-model="form[item.key]"
+          v-bind="item.bind"
+        >
         </Component>
       </el-form-item>
     </div>
     <div class="tools">
-      <el-button v-for="item in tools" :key="item.type" :icon="Search" @click="item.click">{{item.label}}</el-button>
+      <el-button
+        v-for="item in tools"
+        :key="item.type"
+        :icon="Search"
+        @click="item.click"
+        >{{ item.label }}</el-button
+      >
     </div>
   </el-form>
 </template>
 
 <script lang="ts" setup>
+type a = [
+  {
+    isTitle: true;
+    title: string;
+    className: string;
+    bind: any;
+    show: Function;
+  },
+  {
+    key: string;
+    comp: string;
+    label: string;
+    labelHelptext: string;
+    bind: any;
+    options: Array<{ label: string; value: string }>; // comp 为select 的时候
+  }
+];
 const props = defineProps({
-  form: {}, // 表单数据
+  form: {
+    default: () => ({}),
+  }, // 表单数据
   formRules: {}, // 表单校验规则
   formItems: {},
   labelPosition: {},
   formItemOn: {},
   formItemClick: {},
-  inline: {default: false}, 
-  tools: {}
+  inline: { default: false },
+  tools: {},
 });
 </script>
 <style>

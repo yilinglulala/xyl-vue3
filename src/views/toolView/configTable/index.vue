@@ -25,7 +25,7 @@
 import configForm from "@/components/configForm/index.vue";
 import { addClipboard } from "@/utils/tools";
 import { cloneDeep } from "lodash-es";
-import { computed, reactive, ref, watch } from "vue-demi";
+import { computed, reactive, ref, watch } from "vue";
 let drawerVisible = ref(false);
 let strFormItem = ref("");
 const getDefaultForm = () => {
