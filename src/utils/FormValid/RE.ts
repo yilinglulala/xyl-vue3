@@ -1,1 +1,1 @@
-export const Empty = /\S*/
+export const Empty = /^\s*$/

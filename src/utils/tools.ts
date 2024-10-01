@@ -1,5 +1,6 @@
 import { useClipboard } from "@vueuse/core";
 const { copy, isSupported, copied } = useClipboard();
+export { Msg } from "./msg";
 
 // 添加到剪切板
 export const addClipboard = (text: string, cb: Function) => {
