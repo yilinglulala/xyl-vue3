@@ -10,6 +10,13 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(), vueJsx()],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@use "@/assets/styles/var.scss";`,
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -17,6 +24,6 @@ export default defineConfig({
     },
   },
   server: {
-    host: '192.168.31.126',
-  }
+    host: "192.168.31.126",
+  },
 });

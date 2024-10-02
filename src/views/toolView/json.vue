@@ -13,6 +13,7 @@
       <el-input v-model="form.b"></el-input>
     </el-form-item>
   </el-form>
+  <div class="test-attr" title="123" mycolor="#46b9c0" height="90">666</div>
 </template>
 
 <script lang="ts" setup>
@@ -35,3 +36,16 @@ function test() {
 console.log(11, CONSTANT.getOption("Alarm.level.text"));
 console.log(12, CONSTANT.getText("Alarm.level.text", 1));
 </script>
+<style lang="scss">
+.test-attr {
+  --title: attr(title);
+  --mycolor: attr(mycolor);
+  --height: attr(height px, 30px);
+  height: var(--height);
+  color: var(--mycolor);
+  &::after {
+    content: var(--title);
+    background: var(--mycolor);
+  }
+}
+</style>
